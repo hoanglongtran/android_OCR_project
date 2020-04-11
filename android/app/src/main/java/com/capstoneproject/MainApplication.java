@@ -1,7 +1,13 @@
 package com.capstoneproject;
 
+import com.capstoneproject.generated.BasePackageList; // Added for react-native-unimodules
 import android.app.Application;
 import android.content.Context;
+//<react-native-unimodules>
+import org.unimodules.adapters.react.ModuleRegistryAdapter;
+import org.unimodules.adapters.react.ReactModuleRegistryProvider;
+import org.unimodules.core.interfaces.SingletonModule;
+//</react-native-unimodules>
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactInstanceManager;
@@ -9,16 +15,20 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays; // react-native-unimodules
 import java.util.List;
 
 public class MainApplication extends Application implements ReactApplication {
+  // react-native-unimodules
+  private final ReactModuleRegistryProvider mModuleRegistryProvider = new ReactModuleRegistryProvider(new BasePackageList().getPackageList(), null);
 
   private final ReactNativeHost mReactNativeHost =
       new ReactNativeHost(this) {
-        @Override
+        //<react-native-unimodules>
+        /*@Override
         public boolean getUseDeveloperSupport() {
           return BuildConfig.DEBUG;
-        }
+        }*/
 
         @Override
         protected List<ReactPackage> getPackages() {
@@ -26,6 +36,14 @@ public class MainApplication extends Application implements ReactApplication {
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());
+          
+          //<react-native-unimodules>
+          // Add unimodules
+          List<ReactPackage> unimodules = Arrays.<ReactPackage>asList(
+            new ModuleRegistryAdapter(mModuleRegistryProvider)
+          );
+          packages.addAll(unimodules);
+          //</react-native-unimodules>
           return packages;
         }
 
