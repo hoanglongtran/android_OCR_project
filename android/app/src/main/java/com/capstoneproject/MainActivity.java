@@ -1,6 +1,7 @@
 package com.capstoneproject;
 
 import com.facebook.react.ReactActivity;
+import com.rnfs.RNFSPackage;  //react-native-fs
 
 public class MainActivity extends ReactActivity {
 
@@ -12,4 +13,16 @@ public class MainActivity extends ReactActivity {
   protected String getMainComponentName() {
     return "CapstoneProject";
   }
+
+  //<tfjs-implementation>
+  //react-native-fs
+  @Override
+  protected List<ReactPackage> getPackages() {
+    return Arrays.<ReactPackage>asList(
+      new MainReactPackage(),  
+      new RNFSPackage()
+    );
+  }
+  
+  //</tfjs-implementation>
 }
