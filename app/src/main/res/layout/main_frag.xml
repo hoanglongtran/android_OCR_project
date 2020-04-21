@@ -21,10 +21,10 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
                 android:gravity="center_vertical"
-                android:layout_marginLeft="@dimen/list_item_padding"
-                android:layout_marginRight="@dimen/list_item_padding"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:layout_marginBottom="@dimen/activity_vertical_margin" />
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp" />
 
             <ListView
                 android:id="@+id/tasks_list"
@@ -44,7 +44,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_assignment_turned_in_24dp"
+                android:src="@android:drawable/ic_menu_report_image"
                 app:srcCompat="@android:drawable/ic_menu_report_image" />
 
             <TextView
@@ -53,14 +53,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="No Photo here"
-                android:layout_marginBottom="@dimen/list_item_padding" />
+                android:layout_marginBottom="8dp" />
 
             <TextView
                 android:id="@+id/noTasksAdd"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:layout_gravity="center"
-                android:background="@drawable/touch_feedback"
                 android:gravity="center"
                 android:text="Please add some" />
 

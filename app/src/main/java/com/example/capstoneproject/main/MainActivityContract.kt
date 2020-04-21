@@ -10,7 +10,7 @@ interface MainActivityContract {
 
     interface View: BaseView<Presenter> {
 
-        val isActive: Boolean
+        var isActive: Boolean
 
     }
 
