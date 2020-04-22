@@ -1,20 +1,22 @@
 package com.example.capstoneproject.main
 
-import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.view.Menu
+import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.capstoneproject.R
 import com.google.android.material.navigation.NavigationView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 
-class MainActivity: AppCompatActivity() {
+class RecordsActivity: AppCompatActivity() {
 
-    private lateinit var mainActivityPresenter: MainActivityPresenter
+    private lateinit var recordsPresenter: RecordsPresenter
     private lateinit var drawerLayout: DrawerLayout
 
 
@@ -27,6 +29,7 @@ class MainActivity: AppCompatActivity() {
         // Set up the toolbar.
         setSupportActionBar(findViewById(R.id.toolbar))
 
+
         // Set up the navigation drawer.
         val navController = findNavController(R.id.nav_view)
         findViewById<NavigationView>(R.id.nav_view)
@@ -36,6 +39,15 @@ class MainActivity: AppCompatActivity() {
             setStatusBarBackground(R.color.colorPrimaryDark)
         }
         setupDrawerContent(findViewById(R.id.nav_view))
+
+        val recordsFragment = supportFragmentManager.findFragmentById(R.id.contentFrame)
+                as RecordsFragment? ?: RecordsFragment.newInstance().also {
+            replaceFragmentInActivity(it, R.id.contentFrame)
+
+        }
+
+        // Create the presenter
+        recordsPresenter = RecordsPresenter(recordsFragment)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -58,5 +70,17 @@ class MainActivity: AppCompatActivity() {
             drawerLayout.closeDrawers()
             true
         }
+    }
+
+    fun AppCompatActivity.replaceFragmentInActivity(fragment: Fragment, @IdRes frameId: Int) {
+        supportFragmentManager.transact {
+            replace(frameId, fragment)
+        }
+    }
+
+    private inline fun FragmentManager.transact(action: FragmentTransaction.() -> Unit) {
+        beginTransaction().apply {
+            action()
+        }.commit()
     }
 }
