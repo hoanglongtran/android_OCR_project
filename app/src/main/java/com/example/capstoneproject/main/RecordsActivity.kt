@@ -2,7 +2,9 @@ package com.example.capstoneproject.main
 
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.util.Log
 import android.view.Menu
+import android.widget.Toast
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
@@ -19,36 +21,31 @@ class RecordsActivity: AppCompatActivity() {
     private lateinit var recordsPresenter: RecordsPresenter
     private lateinit var drawerLayout: DrawerLayout
 
-
-
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
 
         // Set up the toolbar.
-        setSupportActionBar(findViewById(R.id.toolbar))
+        //setSupportActionBar(findViewById(R.id.toolbar))
 
+        Log.d(TAG, "Hello")
 
-        // Set up the navigation drawer.
-        val navController = findNavController(R.id.nav_view)
-        findViewById<NavigationView>(R.id.nav_view)
-            .setupWithNavController(navController)
-
-        drawerLayout = (findViewById<DrawerLayout>(R.id.drawer_layout)).apply {
-            setStatusBarBackground(R.color.colorPrimaryDark)
-        }
-        setupDrawerContent(findViewById(R.id.nav_view))
 
         val recordsFragment = supportFragmentManager.findFragmentById(R.id.contentFrame)
                 as RecordsFragment? ?: RecordsFragment.newInstance().also {
+            Log.d(TAG, "Loading fragment")
             replaceFragmentInActivity(it, R.id.contentFrame)
-
+            Log.d(TAG, "Finished loading fragment")
         }
 
         // Create the presenter
-        recordsPresenter = RecordsPresenter(recordsFragment)
+        recordsPresenter = RecordsPresenter(recordsFragment).also { Log.d(TAG, "recordsPresenter") }
+
+        Toast.makeText(this, "This is a damn activity", Toast.LENGTH_LONG).show()
     }
+
+
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
@@ -75,6 +72,7 @@ class RecordsActivity: AppCompatActivity() {
     fun AppCompatActivity.replaceFragmentInActivity(fragment: Fragment, @IdRes frameId: Int) {
         supportFragmentManager.transact {
             replace(frameId, fragment)
+            Log.d(TAG, "Replace fragment")
         }
     }
 
@@ -82,5 +80,10 @@ class RecordsActivity: AppCompatActivity() {
         beginTransaction().apply {
             action()
         }.commit()
+        Log.d(TAG, "transact")
+    }
+
+    companion object {
+        private const val TAG = "RecordsActivity"
     }
 }
