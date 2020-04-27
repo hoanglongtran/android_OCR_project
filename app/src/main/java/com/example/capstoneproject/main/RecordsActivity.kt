@@ -29,7 +29,6 @@ class RecordsActivity: AppCompatActivity() {
         // Set up the toolbar.
         //setSupportActionBar(findViewById(R.id.toolbar))
 
-        Log.d(TAG, "Hello")
 
 
         val recordsFragment = supportFragmentManager.findFragmentById(R.id.contentFrame)

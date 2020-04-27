@@ -105,8 +105,6 @@ class RecordsFragment : Fragment(), RecordsContract.View {
     }
 
     override fun showAddRecord() {
-
-
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
             takePictureIntent.resolveActivity(activity!!.packageManager)?.also {
 
