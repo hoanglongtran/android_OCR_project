@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -16,6 +17,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.example.capstoneproject.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.io.File
 
 class RecordsFragment : Fragment(), RecordsContract.View {
 
@@ -112,6 +114,8 @@ class RecordsFragment : Fragment(), RecordsContract.View {
             }
         }
     }
+
+
 
     companion object {
 
