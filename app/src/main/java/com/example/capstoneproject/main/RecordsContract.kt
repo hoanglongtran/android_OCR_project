@@ -1,7 +1,9 @@
 package com.example.capstoneproject.main
 
+import android.content.Context
 import com.example.capstoneproject.BasePresenter
 import com.example.capstoneproject.BaseView
+import java.io.File
 
 /**
  * This specifies the contract between the view and the presenter.
@@ -9,12 +11,13 @@ import com.example.capstoneproject.BaseView
 interface RecordsContract {
 
     interface View: BaseView<Presenter> {
+        var currentPhotoPath: String
 
         var isActive: Boolean
 
         fun showRecord()
 
-        fun showAddRecord()
+        fun showAddRecord(photoFile: File?)
 
 
 
@@ -23,7 +26,7 @@ interface RecordsContract {
     interface Presenter : BasePresenter {
         fun loadRecords()
 
-        fun addNewRecord()
+        fun addNewRecord(context: Context)
 
         fun openRecord()
 

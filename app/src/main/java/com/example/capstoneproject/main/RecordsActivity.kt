@@ -15,6 +15,7 @@ import com.google.android.material.navigation.NavigationView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.example.capstoneproject.util.replaceFragmentInActivity
 
 class RecordsActivity: AppCompatActivity() {
 
@@ -68,19 +69,6 @@ class RecordsActivity: AppCompatActivity() {
         }
     }
 
-    fun AppCompatActivity.replaceFragmentInActivity(fragment: Fragment, @IdRes frameId: Int) {
-        supportFragmentManager.transact {
-            replace(frameId, fragment)
-            Log.d(TAG, "Replace fragment")
-        }
-    }
-
-    private inline fun FragmentManager.transact(action: FragmentTransaction.() -> Unit) {
-        beginTransaction().apply {
-            action()
-        }.commit()
-        Log.d(TAG, "transact")
-    }
 
     companion object {
         private const val TAG = "RecordsActivity"
