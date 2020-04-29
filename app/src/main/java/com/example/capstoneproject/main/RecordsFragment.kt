@@ -12,6 +12,7 @@ import android.widget.*
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import com.example.capstoneproject.R
+import com.example.capstoneproject.editimage.EditImageActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.io.File
 import java.io.IOException
@@ -25,7 +26,7 @@ class RecordsFragment : Fragment(), RecordsContract.View {
     private lateinit var noTaskMainView: TextView
     private lateinit var noTaskAddView: TextView
     private lateinit var tasksView: LinearLayout
-    private lateinit var filteringLabelView: TextView
+
 
     private val REQUEST_TAKE_PHOTO = 1
     override lateinit var currentPhotoPath: String
@@ -66,40 +67,6 @@ class RecordsFragment : Fragment(), RecordsContract.View {
     }
 
 
-    /*override fun onCreateView(inflater: LayoutInflater,
-                              container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        val root = inflater.inflate(R.layout.main_frag, container, false)
-
-        // Set up tasks view
-        with(root) {
-            *//*val listView = findViewById<ListView>(R.id.tasks_list)
-            Log.d(TAG, "Setting up container")
-            // Set up progress indicator
-            findViewById<RelativeLayout>(R.id.tasksContainer)
-
-
-            tasksView = findViewById(R.id.tasksLL)*//*
-
-            // Set up  no tasks view
-            noTasksView = findViewById(R.id.noTasks)
-            noTaskIcon = findViewById(R.id.noTasksIcon)
-            noTaskMainView = findViewById(R.id.noTasksMain)
-
-        }
-
-
-        Log.d(TAG, "Setting up button")
-        // Set up floating action button
-        *//*requireActivity().findViewById<FloatingActionButton>(R.id.fab_capture_record).apply {
-
-            setOnClickListener { presenter.addNewRecord() }
-        }*//*
-
-
-        return root
-    }*/
-
     override fun showRecord() {
         TODO("Not yet implemented")
     }
@@ -122,6 +89,23 @@ class RecordsFragment : Fragment(), RecordsContract.View {
                 }
             }
         }
+        galleryAddPic()
+    }
+
+    override fun showEditRecordImage(){
+        val intent: Intent = Intent(context, EditImageActivity::class.java).apply {
+            putExtra("image_path", currentPhotoPath)
+        }
+        startActivity(intent)
+    }
+
+    private fun galleryAddPic() {
+        Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE).also { mediaScanIntent ->
+            val f = File(currentPhotoPath)
+            mediaScanIntent.data = Uri.fromFile(f)
+            context!!.sendBroadcast(mediaScanIntent)
+        }
+
     }
 
 

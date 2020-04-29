@@ -28,7 +28,7 @@ class RecordsActivity: AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // Set up the toolbar.
-        //setSupportActionBar(findViewById(R.id.toolbar))
+        //setupActionBar()
 
 
 
@@ -42,7 +42,7 @@ class RecordsActivity: AppCompatActivity() {
         // Create the presenter
         recordsPresenter = RecordsPresenter(recordsFragment).also { Log.d(TAG, "recordsPresenter") }
 
-        Toast.makeText(this, "This is a damn activity", Toast.LENGTH_LONG).show()
+
     }
 
 

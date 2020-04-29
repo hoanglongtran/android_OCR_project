@@ -19,7 +19,7 @@ interface RecordsContract {
 
         fun showAddRecord(photoFile: File?)
 
-
+        fun showEditRecordImage()
 
     }
 

@@ -44,7 +44,7 @@ class RecordsPresenter(val recordsView: RecordsContract.View): RecordsContract.P
     private fun createImageFile(context: Context): File {
         // Create an image file name
         val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-        val storageDir: File? = context?.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         return File.createTempFile(
             "RECORD_${timeStamp}_", /* prefix */
             ".jpg", /* suffix */

@@ -1,9 +1,9 @@
-package com.example.capstoneproject.editrecordimage
+package com.example.capstoneproject.editimage
 
 import com.example.capstoneproject.BasePresenter
 import com.example.capstoneproject.BaseView
 
-interface EditRecordImageContract {
+interface EditImageContract {
     interface View: BaseView<Presenter> {
 
         var isActive: Boolean
