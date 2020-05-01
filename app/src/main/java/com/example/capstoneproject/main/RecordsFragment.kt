@@ -1,5 +1,6 @@
 package com.example.capstoneproject.main
 
+import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -8,14 +9,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import com.example.capstoneproject.R
-import com.example.capstoneproject.editimage.EditImageActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.yalantis.ucrop.UCrop
 import java.io.File
-import java.io.IOException
 
 class RecordsFragment : Fragment(), RecordsContract.View {
 
@@ -39,12 +41,6 @@ class RecordsFragment : Fragment(), RecordsContract.View {
         presenter.start()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-    }
-
-
-
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -61,52 +57,67 @@ class RecordsFragment : Fragment(), RecordsContract.View {
         // Set up floating action button
         requireActivity().findViewById<FloatingActionButton>(R.id.fab_capture_record).apply {
 
-        setOnClickListener { presenter.addNewRecord(context) }
+        setOnClickListener {
+            presenter.addNewRecord(context)
+            Log.d(TAG,"finished taking picture")
+
+        }
         }
         return root
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == UCrop.REQUEST_CROP){
+                val resultUri = UCrop.getOutput(data!!)
+            }
+            if (requestCode == REQUEST_TAKE_PHOTO){
+                Log.d(TAG, "editing image")
+                presenter.editRecordImage(context!!)
+            }
+        } else if (resultCode == UCrop.RESULT_ERROR) {
+            val cropError = UCrop.getError(data!!)
+        }
+    }
 
     override fun showRecord() {
         TODO("Not yet implemented")
     }
 
-    override fun showAddRecord(photoFile: File?) {
+    override fun showAddRecord(photoURI: Uri) {
+
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
             // Ensure that there's a camera activity to handle the intent
             takePictureIntent.resolveActivity(activity!!.packageManager)?.also {
-                // Create the File where the photo should go
 
-                // Continue only if the File was successfully created
-                photoFile?.also {
-                    val photoURI: Uri = FileProvider.getUriForFile(
-                        activity!!,
-                        "com.example.android.fileprovider",
-                        it
-                    )
-                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-                    startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO)
-                }
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO)
+
             }
         }
-        galleryAddPic()
+
+
     }
 
-    override fun showEditRecordImage(){
-        val intent: Intent = Intent(context, EditImageActivity::class.java).apply {
+    override fun showEditRecordImage(photoUri: Uri){
+        /*val intent: Intent = Intent(context, EditImageActivity::class.java).apply {
             putExtra("image_path", currentPhotoPath)
         }
-        startActivity(intent)
+        startActivity(intent)*/
+        var uri: Uri = Uri.fromFile(File((currentPhotoPath)))
+        val ucrop: UCrop = UCrop.of(uri, uri)
+
+        activity?.let { ucrop.start(it) }
     }
 
-    private fun galleryAddPic() {
+    /*private fun galleryAddPic() {
         Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE).also { mediaScanIntent ->
             val f = File(currentPhotoPath)
             mediaScanIntent.data = Uri.fromFile(f)
             context!!.sendBroadcast(mediaScanIntent)
         }
 
-    }
+    }*/
 
 
 

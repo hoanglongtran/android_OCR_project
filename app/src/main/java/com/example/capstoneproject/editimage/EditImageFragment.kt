@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.yalantis.ucrop.UCrop
 
 class EditImageFragment: Fragment(), EditImageContract.View
 {
@@ -23,6 +24,8 @@ class EditImageFragment: Fragment(), EditImageContract.View
         savedInstanceState: Bundle?
     ): View? {
         return super.onCreateView(inflater, container, savedInstanceState)
+
+
     }
 
 
