@@ -2,6 +2,7 @@ package com.example.capstoneproject.main
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -41,11 +42,15 @@ class RecordsFragment : Fragment(), RecordsContract.View {
         presenter.start()
     }
 
-    override fun onCreateView(inflater: LayoutInflater,
-                              container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        val root: View = inflater.inflate(R.layout.main_frag, container,
-            false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val root: View = inflater.inflate(
+            R.layout.main_frag, container,
+            false
+        )
         with(root) {
             // Set up  no tasks view
             noTasksView = findViewById(R.id.noTasks)
@@ -57,21 +62,21 @@ class RecordsFragment : Fragment(), RecordsContract.View {
         // Set up floating action button
         requireActivity().findViewById<FloatingActionButton>(R.id.fab_capture_record).apply {
 
-        setOnClickListener {
-            presenter.addNewRecord(context)
-            Log.d(TAG,"finished taking picture")
+            setOnClickListener {
+                presenter.addNewRecord(context)
+                Log.d(TAG, "finished taking picture")
 
-        }
+            }
         }
         return root
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == RESULT_OK) {
-            if (requestCode == UCrop.REQUEST_CROP){
+            if (requestCode == UCrop.REQUEST_CROP) {
                 val resultUri = UCrop.getOutput(data!!)
             }
-            if (requestCode == REQUEST_TAKE_PHOTO){
+            if (requestCode == REQUEST_TAKE_PHOTO) {
                 Log.d(TAG, "editing image")
                 presenter.editRecordImage(context!!)
             }
@@ -99,13 +104,19 @@ class RecordsFragment : Fragment(), RecordsContract.View {
 
     }
 
-    override fun showEditRecordImage(photoUri: Uri){
+    override fun showEditRecordImage(photoUri: Uri) {
         /*val intent: Intent = Intent(context, EditImageActivity::class.java).apply {
             putExtra("image_path", currentPhotoPath)
         }
         startActivity(intent)*/
         var uri: Uri = Uri.fromFile(File((currentPhotoPath)))
-        val ucrop: UCrop = UCrop.of(uri, uri)
+
+        val options = UCrop.Options().apply {
+            setFreeStyleCropEnabled(true)
+            setCompressionFormat(Bitmap.CompressFormat.PNG)
+        }
+
+        val ucrop: UCrop = UCrop.of(uri, uri).withOptions(options)
 
         activity?.let { ucrop.start(it) }
     }
@@ -118,9 +129,6 @@ class RecordsFragment : Fragment(), RecordsContract.View {
         }
 
     }*/
-
-
-
 
 
     companion object {
