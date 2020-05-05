@@ -13,7 +13,7 @@ import java.net.URI
 interface RecordsContract {
 
     interface View: BaseView<Presenter> {
-        var currentPhotoPath: String
+        var currentImagePath: String
 
         var isActive: Boolean
 

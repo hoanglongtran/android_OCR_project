@@ -13,7 +13,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import com.example.capstoneproject.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -32,7 +31,7 @@ class RecordsFragment : Fragment(), RecordsContract.View {
 
 
     private val REQUEST_TAKE_PHOTO = 1
-    override lateinit var currentPhotoPath: String
+    override lateinit var currentImagePath: String
 
     override var isActive: Boolean = false
         get() = isAdded
@@ -109,7 +108,7 @@ class RecordsFragment : Fragment(), RecordsContract.View {
             putExtra("image_path", currentPhotoPath)
         }
         startActivity(intent)*/
-        var uri: Uri = Uri.fromFile(File((currentPhotoPath)))
+        var uri: Uri = Uri.fromFile(File((currentImagePath)))
 
         val options = UCrop.Options().apply {
             setFreeStyleCropEnabled(true)

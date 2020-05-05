@@ -2,15 +2,11 @@ package com.example.capstoneproject.main
 
 import android.content.Context
 import android.net.Uri
-import android.os.Environment
-import android.provider.MediaStore
 import android.util.Log
 import androidx.core.content.FileProvider
+import com.example.capstoneproject.data.source.local.RecordImageFileManager
 import java.io.File
 import java.io.IOException
-import java.net.URI
-import java.text.SimpleDateFormat
-import java.util.*
 
 class RecordsPresenter(val recordsView: RecordsContract.View): RecordsContract.Presenter {
 
@@ -32,11 +28,13 @@ class RecordsPresenter(val recordsView: RecordsContract.View): RecordsContract.P
     override fun addNewRecord(context: Context) {
         photoFile = try {
             // Create the File where the photo should go
-            createImageFile(context)
+            RecordImageFileManager.createImageFile(context)
+
         } catch (ex: IOException) {
             // Error occurred while creating the File
             null
         }
+        recordsView.currentImagePath = RecordImageFileManager.currentImagePath
         createPhotoUri(photoFile, context)
         recordsView.showAddRecord(photoUri)
 
@@ -70,20 +68,7 @@ class RecordsPresenter(val recordsView: RecordsContract.View): RecordsContract.P
         TODO("Not yet implemented")
     }
 
-    @Throws(IOException::class)
-    private fun createImageFile(context: Context): File {
-        // Create an image file name
-        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-        val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        return File.createTempFile(
-            "RECORD_${timeStamp}_", /* prefix */
-            ".png", /* suffix */
-            storageDir /* directory */
-        ).apply {
-            // Save a file: path for use with ACTION_VIEW intents
-            recordsView.currentPhotoPath = absolutePath
-        }
-    }
+
 
     companion object {
 
