@@ -1,6 +1,7 @@
 package com.example.capstoneproject.main
 
 import android.app.Activity.RESULT_OK
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -14,8 +15,11 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.capstoneproject.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.squareup.picasso.Picasso
 import com.yalantis.ucrop.UCrop
 import java.io.File
 
@@ -29,6 +33,9 @@ class RecordsFragment : Fragment(), RecordsContract.View {
     private lateinit var noTaskAddView: TextView
     private lateinit var tasksView: LinearLayout
 
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var viewAdapter: RecyclerView.Adapter<*>
+    private lateinit var viewManager: RecyclerView.LayoutManager
 
     private val REQUEST_TAKE_PHOTO = 1
     override lateinit var currentImagePath: String
@@ -51,11 +58,30 @@ class RecordsFragment : Fragment(), RecordsContract.View {
             false
         )
         with(root) {
+
+            viewManager = GridLayoutManager(context,4)
+            viewAdapter = ImageGridAdapter(myDataset)
+
+            recyclerView = findViewById<RecyclerView>(R.id.recordsLL).apply {
+                // use this setting to improve performance if you know that changes
+                // in content do not change the layout size of the RecyclerView
+                setHasFixedSize(true)
+
+                // use a linear layout manager
+                layoutManager = viewManager
+
+                // specify an viewAdapter (see also next example)
+                adapter = viewAdapter
+
+            }
+
+
             // Set up  no tasks view
             noTasksView = findViewById(R.id.noTasks)
             noTaskIcon = findViewById(R.id.noTasksIcon)
             noTaskMainView = findViewById(R.id.noTasksMain)
         }
+
 
         Log.d(TAG, "Setting up button")
         // Set up floating action button
@@ -88,13 +114,13 @@ class RecordsFragment : Fragment(), RecordsContract.View {
         TODO("Not yet implemented")
     }
 
-    override fun showAddRecord(photoURI: Uri) {
+    override fun showAddRecord(photoUri: Uri) {
 
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
             // Ensure that there's a camera activity to handle the intent
             takePictureIntent.resolveActivity(activity!!.packageManager)?.also {
 
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
                 startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO)
 
             }
@@ -104,10 +130,6 @@ class RecordsFragment : Fragment(), RecordsContract.View {
     }
 
     override fun showEditRecordImage(photoUri: Uri) {
-        /*val intent: Intent = Intent(context, EditImageActivity::class.java).apply {
-            putExtra("image_path", currentPhotoPath)
-        }
-        startActivity(intent)*/
         var uri: Uri = Uri.fromFile(File((currentImagePath)))
 
         val options = UCrop.Options().apply {
@@ -129,6 +151,36 @@ class RecordsFragment : Fragment(), RecordsContract.View {
 
     }*/
 
+    class ImageGridAdapter(private val c: Context, private val images: ArrayList<String>) :
+        RecyclerView.Adapter<ImageGridAdapter.ColorViewHolder>() {
+
+
+        override fun getItemCount(): Int {
+            return images.size
+        }
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ColorViewHolder {
+            return ColorViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.main_frag, parent, false))
+        }
+
+        override fun onBindViewHolder(holder: ColorViewHolder, position: Int) {
+            val path = images[position]
+
+            Picasso.get()
+                .load(path)
+                .resize(250, 250)
+                .centerCrop()
+                .into(holder.iv)
+
+            holder.iv.setOnClickListener {
+                //handle click event on image
+            }
+        }
+
+        class ColorViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+            val iv = view.iv as ImageView
+        }
+    }
 
     companion object {
 
