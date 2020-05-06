@@ -17,10 +17,13 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.capstoneproject.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.squareup.picasso.Picasso
 import com.yalantis.ucrop.UCrop
+import kotlinx.android.synthetic.main.main_frag.*
+import kotlinx.android.synthetic.main.record_image_view.view.*
 import java.io.File
 
 class RecordsFragment : Fragment(), RecordsContract.View {
@@ -59,8 +62,31 @@ class RecordsFragment : Fragment(), RecordsContract.View {
         )
         with(root) {
 
-            viewManager = GridLayoutManager(context,4)
-            viewAdapter = ImageGridAdapter(myDataset)
+            //val sglm = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            //recordsLL.layoutManager = sglm
+
+            val imageList = ArrayList<String>()
+            imageList.add("https://farm5.staticflickr.com/4403/36538794702_83fd8b63b7_c.jpg")
+            imageList.add("https://farm5.staticflickr.com/4354/35684440714_434610d1d6_c.jpg")
+            imageList.add("https://farm5.staticflickr.com/4301/35690634410_f5d0e312cb_c.jpg")
+            imageList.add("https://farm4.staticflickr.com/3854/32890526884_7dc068fedd_c.jpg")
+            imageList.add("https://farm8.staticflickr.com/7787/18143831616_a239c78056_c.jpg")
+            imageList.add("https://farm9.staticflickr.com/8745/16657401480_57653ac8b0_c.jpg")
+            imageList.add("https://farm3.staticflickr.com/2917/14144166232_44613c53c7_c.jpg")
+            imageList.add("https://farm8.staticflickr.com/7453/13960410788_3dd02b7a02_c.jpg")
+            imageList.add("https://farm1.staticflickr.com/920/29297133218_de38a7e4c8_c.jpg")
+            imageList.add("https://farm2.staticflickr.com/1788/42989123072_6720c9608d_c.jpg")
+            imageList.add("https://farm1.staticflickr.com/888/29062858008_89851766c9_c.jpg")
+            imageList.add("https://farm2.staticflickr.com/1731/27940806257_8067196b41_c.jpg")
+            imageList.add("https://farm1.staticflickr.com/884/42745897912_ff65398e38_c.jpg")
+            imageList.add("https://farm2.staticflickr.com/1829/27971893037_1858467f9a_c.jpg")
+            imageList.add("https://farm2.staticflickr.com/1822/41996470025_414452d7a0_c.jpg")
+            imageList.add("https://farm2.staticflickr.com/1793/42937679651_3094ebb2b9_c.jpg")
+            imageList.add("https://farm1.staticflickr.com/892/42078661914_b940d96992_c.jpg")
+            //val igka = ImageGridAdapter(context, imageList)
+            //recordsLL.adapter = igka
+            viewManager = GridLayoutManager(context,3)
+            viewAdapter = RecordImageGridAdapter(context, imageList)
 
             recyclerView = findViewById<RecyclerView>(R.id.recordsLL).apply {
                 // use this setting to improve performance if you know that changes
@@ -75,11 +101,10 @@ class RecordsFragment : Fragment(), RecordsContract.View {
 
             }
 
-
             // Set up  no tasks view
-            noTasksView = findViewById(R.id.noTasks)
+/*            noTasksView = findViewById(R.id.noTasks)
             noTaskIcon = findViewById(R.id.noTasksIcon)
-            noTaskMainView = findViewById(R.id.noTasksMain)
+            noTaskMainView = findViewById(R.id.noTasksMain)*/
         }
 
 
@@ -151,36 +176,7 @@ class RecordsFragment : Fragment(), RecordsContract.View {
 
     }*/
 
-    class ImageGridAdapter(private val c: Context, private val images: ArrayList<String>) :
-        RecyclerView.Adapter<ImageGridAdapter.ColorViewHolder>() {
 
-
-        override fun getItemCount(): Int {
-            return images.size
-        }
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ColorViewHolder {
-            return ColorViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.main_frag, parent, false))
-        }
-
-        override fun onBindViewHolder(holder: ColorViewHolder, position: Int) {
-            val path = images[position]
-
-            Picasso.get()
-                .load(path)
-                .resize(250, 250)
-                .centerCrop()
-                .into(holder.iv)
-
-            holder.iv.setOnClickListener {
-                //handle click event on image
-            }
-        }
-
-        class ColorViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val iv = view.iv as ImageView
-        }
-    }
 
     companion object {
 
