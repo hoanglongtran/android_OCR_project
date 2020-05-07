@@ -18,14 +18,14 @@ class RecordsPresenter(val recordsView: RecordsContract.View): RecordsContract.P
     }
 
     override fun start() {
-        loadRecords()
+        loadRecordImages()
     }
 
-    override fun loadRecords() {
+    override fun loadRecordImages() {
 
     }
 
-    override fun addNewRecord(context: Context) {
+    override fun addNewRecordImage(context: Context) {
         photoFile = try {
             // Create the File where the photo should go
             RecordImageFileManager.createImageFile(context)
@@ -36,7 +36,7 @@ class RecordsPresenter(val recordsView: RecordsContract.View): RecordsContract.P
         }
         recordsView.currentImagePath = RecordImageFileManager.currentImagePath
         createPhotoUri(photoFile, context)
-        recordsView.showAddRecord(photoUri)
+        recordsView.showAddRecordImage(photoUri)
 
     }
 
@@ -68,7 +68,9 @@ class RecordsPresenter(val recordsView: RecordsContract.View): RecordsContract.P
         TODO("Not yet implemented")
     }
 
-
+    override fun inferRecordImage() {
+        recordsView.showInferRecordImage()
+    }
 
     companion object {
 

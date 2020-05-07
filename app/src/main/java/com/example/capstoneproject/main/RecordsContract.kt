@@ -19,20 +19,24 @@ interface RecordsContract {
 
         fun showRecord()
 
-        fun showAddRecord(photoUri: Uri)
+        fun showAddRecordImage(photoUri: Uri)
 
         fun showEditRecordImage(photoUri: Uri)
+
+        fun showInferRecordImage()
     }
 
     interface Presenter : BasePresenter {
-        fun loadRecords()
+        fun loadRecordImages()
 
-        fun addNewRecord(context: Context)
+        fun addNewRecordImage(context: Context)
 
         fun openRecord()
 
         fun deleteRecord()
 
         fun editRecordImage(context: Context)
+
+        fun inferRecordImage()
     }
 }

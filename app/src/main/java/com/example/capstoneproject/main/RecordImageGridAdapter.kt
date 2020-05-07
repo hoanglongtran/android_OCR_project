@@ -25,12 +25,12 @@ class RecordImageGridAdapter(private val c: Context, private val images: ArrayLi
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         val path = images[position]
 
-/*        Picasso.get()
-            .load(path)
+        Picasso.get()
+            .load("content://com.example.android.fileprovider/my_images/RECORD_20200507_041038_5297665690617959634.png")
             .resize(250, 250)
             .centerCrop()
-            .into(holder.iv)*/
-        holder.iv.setImageResource(R.drawable.y430i)
+            .into(holder.iv)
+        //holder.iv.setImageResource(R.drawable.y430i)
         holder.iv.setOnClickListener {
             //handle click event on image
         }
