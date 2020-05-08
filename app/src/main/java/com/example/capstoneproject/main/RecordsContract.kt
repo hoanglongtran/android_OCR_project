@@ -27,6 +27,8 @@ interface RecordsContract {
     }
 
     interface Presenter : BasePresenter {
+        fun createImageData(uri: Uri, context: Context)
+
         fun loadRecordImages()
 
         fun addNewRecordImage(context: Context)
@@ -37,6 +39,6 @@ interface RecordsContract {
 
         fun editRecordImage(context: Context)
 
-        fun inferRecordImage()
+        fun inferRecordImage(context: Context)
     }
 }

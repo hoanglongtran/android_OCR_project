@@ -21,6 +21,7 @@ import com.example.capstoneproject.editrecord.EditRecordActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.yalantis.ucrop.UCrop
 import java.io.File
+import java.io.IOException
 
 class RecordsFragment : Fragment(), RecordsContract.View {
 
@@ -38,6 +39,7 @@ class RecordsFragment : Fragment(), RecordsContract.View {
 
     private val REQUEST_TAKE_PHOTO = 1
     override lateinit var currentImagePath: String
+    lateinit var uri: Uri
 
     override var isActive: Boolean = false
         get() = isAdded
@@ -59,7 +61,18 @@ class RecordsFragment : Fragment(), RecordsContract.View {
         with(root) {
 
 
-            val imageList = ArrayList<String>()
+            val imageList = ArrayList<String>().apply {
+                add("1")
+                add("2")
+                add("3")
+                add("4")
+                add("5")
+                add("6")
+                add("7")
+                add("8")
+                add("9")
+                add("10")
+            }
 
             viewManager = GridLayoutManager(context,3)
             viewAdapter = RecordImageGridAdapter(context, imageList)
@@ -101,14 +114,18 @@ class RecordsFragment : Fragment(), RecordsContract.View {
         if (resultCode == RESULT_OK) {
             if (requestCode == UCrop.REQUEST_CROP) {
                 val resultUri = UCrop.getOutput(data!!)
-                presenter.inferRecordImage()
+                Log.d(TAG, "Edit completed")
+                presenter.inferRecordImage(context!!)
             }
             if (requestCode == REQUEST_TAKE_PHOTO) {
                 Log.d(TAG, "editing image")
                 Log.d(TAG, currentImagePath)
+                uri = Uri.fromFile(File((currentImagePath)))
                 presenter.editRecordImage(context!!)
+                presenter.createImageData(uri, context!!)
             }
         } else if (resultCode == UCrop.RESULT_ERROR) {
+            Log.d(TAG, "Edit error")
             val cropError = UCrop.getError(data!!)
         }
     }
@@ -133,7 +150,7 @@ class RecordsFragment : Fragment(), RecordsContract.View {
     }
 
     override fun showEditRecordImage(photoUri: Uri) {
-        var uri: Uri = Uri.fromFile(File((currentImagePath)))
+
 
         val options = UCrop.Options().apply {
             setFreeStyleCropEnabled(true)
@@ -142,14 +159,14 @@ class RecordsFragment : Fragment(), RecordsContract.View {
 
         val ucrop: UCrop = UCrop.of(uri, uri).withOptions(options)
 
-        activity?.let { ucrop.start(it) }
+        ucrop.start(context!!,this)
     }
 
     override fun showInferRecordImage() {
-        val inferImageIntent = Intent(context, EditRecordActivity::class.java).apply {
+/*        val inferImageIntent = Intent(context, EditRecordActivity::class.java).apply {
 
         }
-        startActivity(inferImageIntent)
+        startActivity(inferImageIntent)*/
     }
 
     /*private fun galleryAddPic() {

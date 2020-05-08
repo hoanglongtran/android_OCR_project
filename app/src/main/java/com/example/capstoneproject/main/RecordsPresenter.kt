@@ -4,11 +4,19 @@ import android.content.Context
 import android.net.Uri
 import android.util.Log
 import androidx.core.content.FileProvider
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.Volley
 import com.example.capstoneproject.data.source.local.RecordImageFileManager
+import com.example.capstoneproject.data.source.remote.FileDataPart
+import com.example.capstoneproject.data.source.remote.VolleyFileUploadRequest
 import java.io.File
 import java.io.IOException
 
 class RecordsPresenter(val recordsView: RecordsContract.View): RecordsContract.Presenter {
+
+    private var imageData: ByteArray? = null
+    private val postURL: String = "https://ptsv2.com/t/ym5xv-1588907040/post" // remember to use your own api
 
     var photoFile: File? = null
     lateinit var photoUri: Uri
@@ -68,8 +76,39 @@ class RecordsPresenter(val recordsView: RecordsContract.View): RecordsContract.P
         TODO("Not yet implemented")
     }
 
-    override fun inferRecordImage() {
+    override fun inferRecordImage(context: Context) {
         recordsView.showInferRecordImage()
+        uploadImage(context)
+    }
+
+    private fun uploadImage(context: Context) {
+        Log.d(TAG, imageData.toString())
+        imageData?: return
+        val request = object : VolleyFileUploadRequest(
+            Request.Method.POST,
+            postURL,
+            Response.Listener {
+                println("response is: $it")
+            },
+            Response.ErrorListener {
+                println("error is: $it")
+            }
+        ) {
+            override fun getByteData(): MutableMap<String, FileDataPart> {
+                var params = HashMap<String, FileDataPart>()
+                params["imageFile"] = FileDataPart("image", imageData!!, "png")
+                return params
+            }
+        }
+        Volley.newRequestQueue(context).add(request)
+    }
+
+    @Throws(IOException::class)
+    override fun createImageData(uri: Uri, context: Context) {
+        val inputStream = context.contentResolver.openInputStream(uri)
+        inputStream?.buffered()?.use {
+            imageData = it.readBytes()
+        }
     }
 
     companion object {

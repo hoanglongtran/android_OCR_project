@@ -12,7 +12,7 @@ class EditRecordActivity: AppCompatActivity()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_edit_image)
+        setContentView(R.layout.activity_edit_record)
 
         val editImageFragment = supportFragmentManager.findFragmentById(R.id.contentFrame)
                 as EditRecordFragment? ?: EditRecordFragment.newInstance().also {
