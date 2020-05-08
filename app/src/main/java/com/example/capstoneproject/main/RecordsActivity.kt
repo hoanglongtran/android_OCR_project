@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.capstoneproject.util.replaceFragmentInActivity
+import com.example.capstoneproject.util.setupActionBar
 
 class RecordsActivity: AppCompatActivity() {
 
@@ -28,7 +29,11 @@ class RecordsActivity: AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // Set up the toolbar.
-        //setupActionBar()
+        setupActionBar(R.id.toolbar) {
+            setHomeAsUpIndicator(R.drawable.ic_menu)
+            setDisplayHomeAsUpEnabled(true)
+        }
+
 
 
 
