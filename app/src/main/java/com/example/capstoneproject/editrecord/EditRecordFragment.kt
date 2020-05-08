@@ -4,7 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.example.capstoneproject.R
+import kotlinx.android.synthetic.main.edit_record_frag.view.*
 
 class EditRecordFragment: Fragment(), EditRecordContract.View
 {
@@ -14,7 +17,7 @@ class EditRecordFragment: Fragment(), EditRecordContract.View
 
     override fun onResume() {
         super.onResume()
-        presenter.start()
+        //presenter.start()
     }
 
     override fun onCreateView(
@@ -22,9 +25,19 @@ class EditRecordFragment: Fragment(), EditRecordContract.View
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
+        val root: View = inflater.inflate(
+            R.layout.edit_record_frag, container,
+            false
+        )
+        with(root) {
 
 
+            var viewManager: TextView = findViewById(R.id.textView)
+
+
+        }
+
+        return root
     }
 
 

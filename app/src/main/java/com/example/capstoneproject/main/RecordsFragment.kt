@@ -163,10 +163,10 @@ class RecordsFragment : Fragment(), RecordsContract.View {
     }
 
     override fun showInferRecordImage() {
-/*        val inferImageIntent = Intent(context, EditRecordActivity::class.java).apply {
+        val inferImageIntent = Intent(context, EditRecordActivity::class.java).apply {
 
         }
-        startActivity(inferImageIntent)*/
+        startActivity(inferImageIntent)
     }
 
     /*private fun galleryAddPic() {
