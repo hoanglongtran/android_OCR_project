@@ -145,12 +145,9 @@ class RecordsFragment : Fragment(), RecordsContract.View {
 
             }
         }
-
-
     }
 
     override fun showEditRecordImage(photoUri: Uri) {
-
 
         val options = UCrop.Options().apply {
             setFreeStyleCropEnabled(true)
@@ -169,14 +166,6 @@ class RecordsFragment : Fragment(), RecordsContract.View {
         startActivity(inferImageIntent)
     }
 
-    /*private fun galleryAddPic() {
-        Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE).also { mediaScanIntent ->
-            val f = File(currentPhotoPath)
-            mediaScanIntent.data = Uri.fromFile(f)
-            context!!.sendBroadcast(mediaScanIntent)
-        }
-
-    }*/
 
 
 

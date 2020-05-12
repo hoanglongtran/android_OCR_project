@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.edit_record_frag.view.*
 
 class EditRecordFragment: Fragment(), EditRecordContract.View
 {
+    
     override var isActive: Boolean = false
         get() = isAdded
     override lateinit var presenter: EditRecordContract.Presenter
@@ -32,7 +33,7 @@ class EditRecordFragment: Fragment(), EditRecordContract.View
         with(root) {
 
 
-            var viewManager: TextView = findViewById(R.id.textView)
+
 
 
         }

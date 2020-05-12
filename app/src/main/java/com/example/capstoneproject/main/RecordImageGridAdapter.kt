@@ -26,8 +26,8 @@ class RecordImageGridAdapter(private val c: Context, private val images: ArrayLi
         val path = images[position]
 
         Picasso.get()
-            .load("content://com.example.android.fileprovider/my_images/RECORD_20200508_134610_841890139097569614.png")
-            .resize(250, 250)
+            .load("content://com.example.android.fileprovider/my_images/RECORD_20200511_110422_6254468004404327641.png")
+            .resize(600, 600)
             .centerCrop()
             .into(holder.iv)
         //holder.iv.setImageResource(R.drawable.y430i)
