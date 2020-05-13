@@ -6,12 +6,14 @@ import android.util.Log
 import androidx.core.content.FileProvider
 import com.android.volley.Request
 import com.android.volley.Response
+import com.android.volley.VolleyLog
 import com.android.volley.toolbox.Volley
 import com.example.capstoneproject.data.source.local.RecordImageFileManager
 import com.example.capstoneproject.data.source.remote.FileDataPart
 import com.example.capstoneproject.data.source.remote.VolleyFileUploadRequest
 import java.io.File
 import java.io.IOException
+import java.util.ArrayList
 
 class RecordsPresenter(val recordsView: RecordsContract.View): RecordsContract.Presenter {
 
@@ -46,6 +48,10 @@ class RecordsPresenter(val recordsView: RecordsContract.View): RecordsContract.P
         createPhotoUri(photoFile, context)
         recordsView.showAddRecordImage(photoUri)
 
+    }
+
+    override fun listRecordImage(context: Context): ArrayList<String> {
+        return RecordImageFileManager.listFile(context)
     }
 
     private fun createPhotoUri(photoFile: File?, context: Context) {
@@ -100,6 +106,7 @@ class RecordsPresenter(val recordsView: RecordsContract.View): RecordsContract.P
                 return params
             }
         }
+        VolleyLog.DEBUG = true
         Volley.newRequestQueue(context).add(request)
     }
 

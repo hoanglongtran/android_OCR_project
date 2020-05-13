@@ -23,22 +23,22 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/editText4"
+                    android:id="@+id/patientName"
                     android:layout_width="685dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Full Name" />
+                    android:hint="Full Name"
+                    android:inputType="textPersonName" />
 
                 <EditText
-                    android:id="@+id/editText5"
+                    android:id="@+id/age"
                     android:layout_width="34dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Age" />
+                    android:hint="Age"
+                    android:inputType="textPersonName" />
 
                 <Spinner
                     android:id="@+id/spinner"
@@ -53,31 +53,31 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/editText8"
+                    android:id="@+id/branch"
                     android:layout_width="722dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Branch" />
+                    android:hint="Branch"
+                    android:inputType="textPersonName" />
 
                 <EditText
-                    android:id="@+id/editText9"
+                    android:id="@+id/room"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Room" />
+                    android:hint="Room"
+                    android:inputType="textPersonName" />
 
                 <EditText
-                    android:id="@+id/editText10"
+                    android:id="@+id/bed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Bed" />
+                    android:hint="Bed"
+                    android:inputType="textPersonName" />
             </LinearLayout>
 
             <LinearLayout
@@ -86,21 +86,23 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/editText"
+                    android:id="@+id/development"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
                     android:gravity="start|top"
+                    android:hint="Development"
                     android:inputType="textMultiLine" />
 
                 <EditText
-                    android:id="@+id/editText2"
+                    android:id="@+id/medicalInstruction"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
                     android:gravity="start|top"
+                    android:hint="Medical Instructions"
                     android:inputType="textMultiLine" />
             </LinearLayout>
 

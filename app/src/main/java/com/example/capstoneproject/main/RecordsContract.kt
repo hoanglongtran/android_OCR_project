@@ -6,6 +6,7 @@ import com.example.capstoneproject.BasePresenter
 import com.example.capstoneproject.BaseView
 import java.io.File
 import java.net.URI
+import java.util.ArrayList
 
 /**
  * This specifies the contract between the view and the presenter.
@@ -40,5 +41,6 @@ interface RecordsContract {
         fun editRecordImage(context: Context)
 
         fun inferRecordImage(context: Context)
+        fun listRecordImage(context: Context): ArrayList<String>
     }
 }

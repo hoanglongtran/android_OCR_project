@@ -61,18 +61,7 @@ class RecordsFragment : Fragment(), RecordsContract.View {
         with(root) {
 
 
-            val imageList = ArrayList<String>().apply {
-                add("1")
-                add("2")
-                add("3")
-                add("4")
-                add("5")
-                add("6")
-                add("7")
-                add("8")
-                add("9")
-                add("10")
-            }
+            val imageList = presenter.listRecordImage(context)
 
             viewManager = GridLayoutManager(context,3)
             viewAdapter = RecordImageGridAdapter(context, imageList)
@@ -89,6 +78,7 @@ class RecordsFragment : Fragment(), RecordsContract.View {
                 adapter = viewAdapter
 
             }
+
 
             // Set up  no tasks view
 /*            noTasksView = findViewById(R.id.noTasks)

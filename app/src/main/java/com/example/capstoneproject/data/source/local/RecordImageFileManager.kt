@@ -2,10 +2,12 @@ package com.example.capstoneproject.data.source.local
 
 import android.content.Context
 import android.os.Environment
+import android.util.Log
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 object RecordImageFileManager{
 
@@ -26,5 +28,30 @@ object RecordImageFileManager{
             currentImagePath = absolutePath
         }
     }
+
+    fun listFile(context: Context): ArrayList<String> {
+        val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        val fileList = storageDir?.listFiles()
+
+        val imageList = ArrayList<String>().apply {
+            if (fileList != null && fileList.size > 0) {
+                for (currentFile in fileList) {
+                    if (currentFile.name.endsWith(".png")) {
+                        // File absolute path
+                        Log.d(TAG, currentFile.getAbsolutePath())
+                        // File Name
+                        Log.d(TAG, currentFile.getName())
+                        add(currentFile.getAbsolutePath())
+                    }
+                }
+                Log.d(TAG, "" + fileList.size)
+            }
+        }
+
+        return imageList
+    }
+
+
+    private const val TAG = "ImageManager"
 
 }
