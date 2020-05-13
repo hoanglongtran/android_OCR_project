@@ -23,7 +23,7 @@ class RecordImageGridAdapter(private val context: Context, private val images: A
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
-        return ImageViewHolder(LayoutInflater.from(context).inflate(R.layout.record_image_view, parent, false))
+        return ImageViewHolder(LayoutInflater.from(context).inflate(R.layout.recycler_record_image_view, parent, false))
     }
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
