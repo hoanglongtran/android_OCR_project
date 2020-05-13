@@ -46,6 +46,7 @@ class RecordsFragment : Fragment(), RecordsContract.View {
 
     override fun onResume() {
         super.onResume()
+        viewAdapter.notifyDataSetChanged()
         presenter.start()
     }
 
@@ -99,6 +100,7 @@ class RecordsFragment : Fragment(), RecordsContract.View {
         }
         return root
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == RESULT_OK) {
