@@ -46,7 +46,7 @@ class ViewRecordImageFragment : Fragment(), ViewRecordImageContract.View {
 
         fun newInstance() = ViewRecordImageFragment()
 
-        private const val TAG = "EditImage"
+        private const val TAG = "ViewImage"
 
     }
 

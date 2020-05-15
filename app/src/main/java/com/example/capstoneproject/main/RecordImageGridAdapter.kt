@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.graphics.Bitmap
 import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,6 +30,7 @@ class RecordImageGridAdapter(private val context: Context, private val images: A
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         val path = images[position]
         val uri = Uri.fromFile(File((path)))
+        Log.d("Uri", uri.toString())
         Picasso.get()
             .load(uri)
             .resize(600, 600)

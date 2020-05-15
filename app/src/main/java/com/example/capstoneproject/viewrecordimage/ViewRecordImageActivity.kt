@@ -30,6 +30,6 @@ class ViewRecordImageActivity: AppCompatActivity()
     }
 
     companion object {
-        private const val TAG = "EditImageActivity"
+        private const val TAG = "ViewRecordImageActivity"
     }
 }

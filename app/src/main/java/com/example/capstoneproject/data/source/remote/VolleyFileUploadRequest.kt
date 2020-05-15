@@ -11,7 +11,9 @@ open class VolleyFileUploadRequest(
     method: Int,
     url: String,
     listener: Response.Listener<NetworkResponse>,
-    errorListener: Response.ErrorListener) : Request<NetworkResponse>(method, url, errorListener) {
+    errorListener: Response.ErrorListener) : Request<NetworkResponse>(method, url, errorListener)
+{
+
     private var responseListener: Response.Listener<NetworkResponse>? = null
     init {
         this.responseListener = listener

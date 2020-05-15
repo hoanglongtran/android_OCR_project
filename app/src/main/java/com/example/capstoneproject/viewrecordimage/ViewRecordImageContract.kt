@@ -8,10 +8,6 @@ interface ViewRecordImageContract {
 
         var isActive: Boolean
 
-
-
-
-
     }
 
     interface Presenter : BasePresenter {
