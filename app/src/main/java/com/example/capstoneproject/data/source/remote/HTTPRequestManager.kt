@@ -8,7 +8,7 @@ import java.io.UnsupportedEncodingException
 import java.net.UnknownHostException
 
 
-object RecordImageInferenceHTTPRequest {
+object HTTPRequestManager {
 
 
     fun uploadImage(imageData: ByteArray): JSONObject? {

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.capstoneproject.R
@@ -12,7 +13,7 @@ import com.example.capstoneproject.R
 class ViewRecordImageFragment : Fragment(), ViewRecordImageContract.View {
     override lateinit var presenter: ViewRecordImageContract.Presenter
 
-
+    private lateinit var recordImageView: ImageView
 
     override var isActive: Boolean = false
         get() = isAdded
@@ -34,7 +35,7 @@ class ViewRecordImageFragment : Fragment(), ViewRecordImageContract.View {
             false
         )
         with(root) {
-
+            recordImageView = findViewById(R.id.recordImageView)
 
         }
 

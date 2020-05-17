@@ -1,6 +1,6 @@
 package com.example.capstoneproject.viewrecordimage
 
-class ViewRecordImagePresenter(val editRecordView: ViewRecordImageContract.View): ViewRecordImageContract.Presenter
+class ViewRecordImagePresenter(val imagePath: String, val editRecordView: ViewRecordImageContract.View): ViewRecordImageContract.Presenter
 {
     init {
         editRecordView.presenter = this

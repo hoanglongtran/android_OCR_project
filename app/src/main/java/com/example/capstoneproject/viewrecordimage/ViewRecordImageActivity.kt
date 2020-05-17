@@ -14,6 +14,7 @@ class ViewRecordImageActivity: AppCompatActivity()
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_view_record_image)
+        val imagePath = intent.getStringExtra(IMAGE_PATH)
 
         setupActionBar(R.id.toolbar) {
             setDisplayHomeAsUpEnabled(true)
@@ -26,10 +27,12 @@ class ViewRecordImageActivity: AppCompatActivity()
         }
 
         //Create the presenter
-        viewRecordImagePresenter = ViewRecordImagePresenter(viewRecordImageFragment)
+        viewRecordImagePresenter = ViewRecordImagePresenter(imagePath, viewRecordImageFragment)
     }
 
     companion object {
         private const val TAG = "ViewRecordImageActivity"
+        const val IMAGE_PATH = "PATH"
     }
+
 }

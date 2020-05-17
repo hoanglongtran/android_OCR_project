@@ -2,18 +2,22 @@ package com.example.capstoneproject.main
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.capstoneproject.R
 import com.squareup.picasso.Picasso
 import com.yalantis.ucrop.UCrop
 import java.io.File
+
 
 class RecordImageGridAdapter(private val context: Context, private val images: ArrayList<String>) :
     RecyclerView.Adapter<RecordImageGridAdapter.ImageViewHolder>() {
@@ -33,20 +37,25 @@ class RecordImageGridAdapter(private val context: Context, private val images: A
         Log.d("Uri", uri.toString())
         Picasso.get()
             .load(uri)
-            .resize(600, 600)
+            .resize(250, 250)
             .centerCrop()
             .into(holder.iv)
 
         holder.iv.setOnClickListener {
             //handle click event on image
-            val options = UCrop.Options().apply {
+            val intent = Intent(context, RecordsActivity::class.java)
+            val bundle = Bundle()
+
+            intent.putExtra("path", path)
+            context.startActivity(intent)
+/*            val options = UCrop.Options().apply {
                 setFreeStyleCropEnabled(true)
                 setCompressionFormat(Bitmap.CompressFormat.PNG)
             }
 
             val ucrop: UCrop = UCrop.of(uri, uri).withOptions(options)
 
-            ucrop.start(context as Activity)
+            ucrop.start(context as Activity)*/
         }
     }
 

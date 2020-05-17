@@ -8,7 +8,7 @@ import com.android.volley.*
 import com.android.volley.toolbox.Volley
 import com.example.capstoneproject.data.source.local.RecordImageFileManager
 import com.example.capstoneproject.data.source.remote.FileDataPart
-import com.example.capstoneproject.data.source.remote.RecordImageInferenceHTTPRequest
+import com.example.capstoneproject.data.source.remote.HTTPRequestManager
 import com.example.capstoneproject.data.source.remote.VolleyFileUploadRequest
 import org.json.JSONObject
 import java.io.File
@@ -89,7 +89,7 @@ class RecordsPresenter(val recordsView: RecordsContract.View): RecordsContract.P
 
     private fun uploadImage(context: Context) {
         imageData?: return
-        val response = RecordImageInferenceHTTPRequest.uploadImage(imageData!!)
+        val response = HTTPRequestManager.uploadImage(imageData!!)
         /*val request = object : VolleyFileUploadRequest(
             Method.POST,
             postURL,
