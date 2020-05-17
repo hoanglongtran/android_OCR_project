@@ -33,10 +33,10 @@ object RecordImageFileManager{
         val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         val fileList = storageDir?.listFiles()
 
-        val imageList = ArrayList<String>().apply {
+        return ArrayList<String>().apply {
             if (fileList != null && fileList.size > 0) {
                 for (currentFile in fileList) {
-                    if (currentFile.name.endsWith(".png")) {
+                    if (currentFile.name.endsWith(".png") || currentFile.name.endsWith(".jpg")) {
                         // File absolute path
                         Log.d(TAG, currentFile.getAbsolutePath())
                         // File Name
@@ -47,8 +47,6 @@ object RecordImageFileManager{
                 Log.d(TAG, "" + fileList.size)
             }
         }
-
-        return imageList
     }
 
 

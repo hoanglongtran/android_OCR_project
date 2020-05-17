@@ -1,13 +1,22 @@
 package com.example.capstoneproject.viewrecordimage
 
-class ViewRecordImagePresenter(val imagePath: String, val editRecordView: ViewRecordImageContract.View): ViewRecordImageContract.Presenter
+import android.content.Context
+import android.net.Uri
+import android.util.Log
+import java.io.File
+
+class ViewRecordImagePresenter(val imagePath: String, val viewRecordImageView: ViewRecordImageContract.View): ViewRecordImageContract.Presenter
 {
     init {
-        editRecordView.presenter = this
+        viewRecordImageView.presenter = this
     }
 
-    override fun editImage() {
-        TODO("Not yet implemented")
+    override fun editRecordImage(context: Context){
+        Log.d(TAG,"editing picture")
+        val uri = Uri.fromFile(File((imagePath)))
+        viewRecordImageView.showEditRecordImage(uri)
+
+
     }
 
     override fun deleteImage() {
@@ -20,5 +29,13 @@ class ViewRecordImagePresenter(val imagePath: String, val editRecordView: ViewRe
 
     override fun start() {
         TODO("Do something")
+    }
+
+    override fun getRecordImage(): File {
+        return File(imagePath)
+    }
+
+    companion object{
+        private const val TAG = "RecordImageView"
     }
 }

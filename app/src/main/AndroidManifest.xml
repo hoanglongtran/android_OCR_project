@@ -29,11 +29,13 @@
         </activity>
         <activity android:name=".editrecord.EditRecordActivity" />
 
+
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             tools:ignore="LockedOrientationActivity" />
+        <activity android:name=".viewrecordimage.ViewRecordImageActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
