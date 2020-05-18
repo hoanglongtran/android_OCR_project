@@ -49,6 +49,11 @@ object RecordImageFileManager{
         }
     }
 
+    fun deleteImage(imagePath: String){
+        val file = File(imagePath)
+        val deleted: Boolean = file.delete()
+    }
+
 
     private const val TAG = "ImageManager"
 

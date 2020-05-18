@@ -4,6 +4,7 @@ import android.R.id
 import android.content.Context
 import android.net.Uri
 import android.util.Log
+import com.example.capstoneproject.data.source.local.RecordImageFileManager
 import java.io.File
 
 
@@ -22,8 +23,7 @@ class ViewRecordImagePresenter(val imagePath: String, val imagePosition: Int, va
     }
 
     override fun deleteImage() {
-        val file = File(imagePath)
-        val deleted: Boolean = file.delete()
+        RecordImageFileManager.deleteImage(imagePath)
         viewRecordImageView.showRecrodImageDeleted(imagePosition)
     }
 
