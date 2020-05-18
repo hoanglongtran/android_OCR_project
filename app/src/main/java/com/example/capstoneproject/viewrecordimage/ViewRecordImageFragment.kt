@@ -1,6 +1,7 @@
 package com.example.capstoneproject.viewrecordimage
 
 import android.app.Activity
+import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -19,6 +20,7 @@ class ViewRecordImageFragment : Fragment(), ViewRecordImageContract.View {
     override lateinit var presenter: ViewRecordImageContract.Presenter
 
     private lateinit var recordImageView: ImageView
+
 
     override var isActive: Boolean = false
         get() = isAdded
@@ -100,6 +102,14 @@ class ViewRecordImageFragment : Fragment(), ViewRecordImageContract.View {
         ucrop.start(context!!,this)
     }
 
+    override fun showRecrodImageDeleted(imagePosition: Int) {
+        val intent: Intent = Intent();
+        //---set the data to pass back---
+        intent.putExtra("POSITION", imagePosition)
+        activity?.setResult(RESULT_DELETED_IMAGE, intent)
+        activity?.finish()
+    }
+
     private fun updateImage(){
         val imgFile = presenter.getRecordImage()
         if (imgFile.exists()) {
@@ -113,6 +123,8 @@ class ViewRecordImageFragment : Fragment(), ViewRecordImageContract.View {
         fun newInstance() = ViewRecordImageFragment()
 
         private const val TAG = "ViewImage"
+        const val REQUEST_DELETE_IMAGE = 42
+        const val RESULT_DELETED_IMAGE = 69
 
     }
 

@@ -13,6 +13,8 @@ interface ViewRecordImageContract {
 
         fun showEditRecordImage(photoUri: Uri)
 
+        fun showRecrodImageDeleted(imagePosition: Int)
+
     }
 
     interface Presenter : BasePresenter {

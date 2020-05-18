@@ -1,5 +1,6 @@
 package com.example.capstoneproject.records
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -9,14 +10,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import com.example.capstoneproject.R
 import com.example.capstoneproject.viewrecordimage.ViewRecordImageActivity
+import com.example.capstoneproject.viewrecordimage.ViewRecordImageFragment
 import com.squareup.picasso.Picasso
 import java.io.File
 
 
-class RecordImageGridAdapter(private val context: Context, private val images: ArrayList<String>) :
+class RecordImageGridAdapter(private val context: Context, private val images: ArrayList<String>, val fragment: Fragment) :
     RecyclerView.Adapter<RecordImageGridAdapter.ImageViewHolder>() {
 
 
@@ -44,7 +48,12 @@ class RecordImageGridAdapter(private val context: Context, private val images: A
             val bundle = Bundle()
 
             intent.putExtra("PATH", path)
-            context.startActivity(intent)
+            intent.putExtra("POSITION", position)
+            //context.startActivity(intent)
+
+            fragment.startActivityForResult(intent, ViewRecordImageFragment.REQUEST_DELETE_IMAGE)
+
+
 /*            val options = UCrop.Options().apply {
                 setFreeStyleCropEnabled(true)
                 setCompressionFormat(Bitmap.CompressFormat.PNG)
@@ -54,6 +63,13 @@ class RecordImageGridAdapter(private val context: Context, private val images: A
 
             ucrop.start(context as Activity)*/
         }
+    }
+    fun addImage(imagePath: String){
+        images.add(imagePath)
+    }
+
+    fun deleteImage(imagePosition: Int){
+        images.removeAt(imagePosition)
     }
 
     class ImageViewHolder(view: View) : RecyclerView.ViewHolder(view) {

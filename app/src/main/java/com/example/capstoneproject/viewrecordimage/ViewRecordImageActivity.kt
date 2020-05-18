@@ -16,6 +16,7 @@ class ViewRecordImageActivity: AppCompatActivity()
 
         setContentView(R.layout.view_record_image_act)
         val imagePath = intent.getStringExtra(IMAGE_PATH)
+        val imagePosition = intent.getIntExtra(IMAGE_POSITION, 0)
 
         // Set up the toolbar.
         setupActionBar(R.id.toolbar) {
@@ -29,7 +30,7 @@ class ViewRecordImageActivity: AppCompatActivity()
         }
 
         //Create the presenter
-        viewRecordImagePresenter = ViewRecordImagePresenter(imagePath, viewRecordImageFragment)
+        viewRecordImagePresenter = ViewRecordImagePresenter(imagePath, imagePosition, viewRecordImageFragment)
     }
 
 
@@ -41,6 +42,9 @@ class ViewRecordImageActivity: AppCompatActivity()
     companion object {
         private const val TAG = "ViewRecordImageActivity"
         const val IMAGE_PATH = "PATH"
+        const val IMAGE_POSITION = "POSITION"
     }
 
 }
+
+

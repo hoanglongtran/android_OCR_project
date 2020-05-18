@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.capstoneproject.R
 import com.example.capstoneproject.editrecord.EditRecordActivity
+import com.example.capstoneproject.viewrecordimage.ViewRecordImageFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.yalantis.ucrop.UCrop
 import java.io.File
@@ -33,7 +34,7 @@ class RecordsFragment : Fragment(), RecordsContract.View {
     private lateinit var tasksView: LinearLayout
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var viewAdapter: RecyclerView.Adapter<*>
+    private lateinit var viewAdapter: RecordImageGridAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
 
     private val REQUEST_TAKE_PHOTO = 1
@@ -64,7 +65,7 @@ class RecordsFragment : Fragment(), RecordsContract.View {
             val imageList = presenter.listRecordImage(context)
 
             viewManager = GridLayoutManager(context,3)
-            viewAdapter = RecordImageGridAdapter(context, imageList)
+            viewAdapter = RecordImageGridAdapter(context, imageList, this@RecordsFragment)
 
             recyclerView = findViewById<RecyclerView>(R.id.recordsLL).apply {
                 // use this setting to improve performance if you know that changes
@@ -79,11 +80,6 @@ class RecordsFragment : Fragment(), RecordsContract.View {
 
             }
 
-
-            // Set up  no tasks view
-/*            noTasksView = findViewById(R.id.noTasks)
-            noTaskIcon = findViewById(R.id.noTasksIcon)
-            noTaskMainView = findViewById(R.id.noTasksMain)*/
         }
 
 
@@ -102,22 +98,35 @@ class RecordsFragment : Fragment(), RecordsContract.View {
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        Log.d(TAG, "onActivityResult")
+        super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK) {
+            Log.d(TAG, "Result OK")
             if (requestCode == UCrop.REQUEST_CROP) {
                 val resultUri = UCrop.getOutput(data!!)
                 Log.d(TAG, "Edit completed")
                 presenter.inferRecordImage(context!!)
             }
             if (requestCode == REQUEST_TAKE_PHOTO) {
-                Log.d(TAG, "editing image")
+                Log.d(TAG, "Image captured")
                 Log.d(TAG, currentImagePath)
                 uri = Uri.fromFile(File((currentImagePath)))
-                presenter.editRecordImage(context!!)
-                presenter.createImageData(uri, context!!)
+                viewAdapter.addImage(currentImagePath)
+                viewAdapter.notifyDataSetChanged()
+                //presenter.createImageData(uri, context!!)
             }
         } else if (resultCode == UCrop.RESULT_ERROR) {
             Log.d(TAG, "Edit error")
             val cropError = UCrop.getError(data!!)
+        }
+
+        if (requestCode == ViewRecordImageFragment.REQUEST_DELETE_IMAGE && resultCode == ViewRecordImageFragment.RESULT_DELETED_IMAGE ){
+            Log.d(TAG, "Image Deleted")
+            val deletedPosition = data?.getIntExtra(IMAGE_POSITION, -1)
+            if (deletedPosition != null) {
+                viewAdapter.deleteImage(deletedPosition)
+                viewAdapter.notifyDataSetChanged()
+            }
         }
     }
 
@@ -165,6 +174,7 @@ class RecordsFragment : Fragment(), RecordsContract.View {
         fun newInstance() = RecordsFragment()
 
         private const val TAG = "RecordsFragment"
+        const val IMAGE_POSITION = "POSITION"
 
     }
 }

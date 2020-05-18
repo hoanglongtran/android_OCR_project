@@ -1,11 +1,13 @@
 package com.example.capstoneproject.viewrecordimage
 
+import android.R.id
 import android.content.Context
 import android.net.Uri
 import android.util.Log
 import java.io.File
 
-class ViewRecordImagePresenter(val imagePath: String, val viewRecordImageView: ViewRecordImageContract.View): ViewRecordImageContract.Presenter
+
+class ViewRecordImagePresenter(val imagePath: String, val imagePosition: Int, val viewRecordImageView: ViewRecordImageContract.View): ViewRecordImageContract.Presenter
 {
     init {
         viewRecordImageView.presenter = this
@@ -20,7 +22,9 @@ class ViewRecordImagePresenter(val imagePath: String, val viewRecordImageView: V
     }
 
     override fun deleteImage() {
-        TODO("Not yet implemented")
+        val file = File(imagePath)
+        val deleted: Boolean = file.delete()
+        viewRecordImageView.showRecrodImageDeleted(imagePosition)
     }
 
     override fun inferImage() {
