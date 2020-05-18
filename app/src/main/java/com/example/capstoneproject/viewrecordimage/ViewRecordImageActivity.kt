@@ -30,6 +30,11 @@ class ViewRecordImageActivity: AppCompatActivity()
         viewRecordImagePresenter = ViewRecordImagePresenter(imagePath, viewRecordImageFragment)
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
+
     companion object {
         private const val TAG = "ViewRecordImageActivity"
         const val IMAGE_PATH = "PATH"

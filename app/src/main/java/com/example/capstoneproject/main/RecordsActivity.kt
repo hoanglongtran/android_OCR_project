@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
 import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -34,7 +36,11 @@ class RecordsActivity: AppCompatActivity() {
             setDisplayHomeAsUpEnabled(true)
         }
 
-
+        // Set up the navigation drawer.
+        drawerLayout = (findViewById<DrawerLayout>(R.id.drawer_layout)).apply {
+            setStatusBarBackground(R.color.colorPrimaryDark)
+        }
+        setupDrawerContent(findViewById(R.id.nav_view))
 
 
         val recordsFragment = supportFragmentManager.findFragmentById(R.id.contentFrame)
@@ -50,7 +56,14 @@ class RecordsActivity: AppCompatActivity() {
 
     }
 
-
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            // Open the navigation drawer when the home icon is selected from the toolbar.
+            drawerLayout.openDrawer(GravityCompat.START)
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
