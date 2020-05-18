@@ -1,4 +1,4 @@
-package com.example.capstoneproject.main
+package com.example.capstoneproject.records
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
@@ -21,7 +21,6 @@ import com.example.capstoneproject.editrecord.EditRecordActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.yalantis.ucrop.UCrop
 import java.io.File
-import java.io.IOException
 
 class RecordsFragment : Fragment(), RecordsContract.View {
 
@@ -56,7 +55,7 @@ class RecordsFragment : Fragment(), RecordsContract.View {
         savedInstanceState: Bundle?
     ): View? {
         val root: View = inflater.inflate(
-            R.layout.main_frag, container,
+            R.layout.records_frag, container,
             false
         )
         with(root) {

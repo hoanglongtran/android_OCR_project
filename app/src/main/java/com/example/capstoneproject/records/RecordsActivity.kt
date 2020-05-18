@@ -1,22 +1,14 @@
-package com.example.capstoneproject.main
+package com.example.capstoneproject.records
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
-import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
 import com.example.capstoneproject.R
 import com.google.android.material.navigation.NavigationView
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import com.example.capstoneproject.util.replaceFragmentInActivity
 import com.example.capstoneproject.util.setupActionBar
 
@@ -28,7 +20,7 @@ class RecordsActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.records_act)
 
         // Set up the toolbar.
         setupActionBar(R.id.toolbar) {

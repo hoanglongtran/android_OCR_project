@@ -13,7 +13,7 @@ class ViewRecordImageActivity: AppCompatActivity()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_view_record_image)
+        setContentView(R.layout.view_record_image_act)
         val imagePath = intent.getStringExtra(IMAGE_PATH)
 
         setupActionBar(R.id.toolbar) {

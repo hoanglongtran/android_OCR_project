@@ -13,7 +13,7 @@ class EditRecordActivity: AppCompatActivity()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_edit_record)
+        setContentView(R.layout.edit_record_act)
 
         setupActionBar(R.id.toolbar) {
             setDisplayHomeAsUpEnabled(true)

@@ -1,11 +1,9 @@
-package com.example.capstoneproject.main
+package com.example.capstoneproject.records
 
 import android.content.Context
 import android.net.Uri
 import com.example.capstoneproject.BasePresenter
 import com.example.capstoneproject.BaseView
-import java.io.File
-import java.net.URI
 import java.util.ArrayList
 
 /**

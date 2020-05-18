@@ -1,16 +1,11 @@
-package com.example.capstoneproject.main
+package com.example.capstoneproject.records
 
 import android.content.Context
 import android.net.Uri
 import android.util.Log
 import androidx.core.content.FileProvider
-import com.android.volley.*
-import com.android.volley.toolbox.Volley
 import com.example.capstoneproject.data.source.local.RecordImageFileManager
-import com.example.capstoneproject.data.source.remote.FileDataPart
 import com.example.capstoneproject.data.source.remote.HTTPRequestManager
-import com.example.capstoneproject.data.source.remote.VolleyFileUploadRequest
-import org.json.JSONObject
 import java.io.File
 import java.io.IOException
 import java.util.ArrayList
