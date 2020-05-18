@@ -7,15 +7,12 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.example.capstoneproject.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.yalantis.ucrop.UCrop
-import java.io.File
 
 
 class ViewRecordImageFragment : Fragment(), ViewRecordImageContract.View {
@@ -42,7 +39,13 @@ class ViewRecordImageFragment : Fragment(), ViewRecordImageContract.View {
             R.layout.view_record_image_frag, container,
             false
         )
+        //notify the fragment that it should participate in options menu handling
+
+        setHasOptionsMenu(true)
         with(root) {
+
+
+
             recordImageView = findViewById(R.id.recordImageView)
 
             updateImage()
@@ -56,6 +59,21 @@ class ViewRecordImageFragment : Fragment(), ViewRecordImageContract.View {
 
         return root
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_edit -> presenter.editRecordImage(context!!)
+            R.id.action_delete -> presenter.deleteImage()
+            //R.id.menu_refresh -> presenter.loadTasks(true)
+        }
+        return true
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.view_record_image_fragment_menu, menu)
+        return super.onCreateOptionsMenu(menu, inflater)
+    }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK) {
@@ -82,7 +100,7 @@ class ViewRecordImageFragment : Fragment(), ViewRecordImageContract.View {
         ucrop.start(context!!,this)
     }
 
-    fun updateImage(){
+    private fun updateImage(){
         val imgFile = presenter.getRecordImage()
         if (imgFile.exists()) {
             val myBitmap = BitmapFactory.decodeFile(imgFile.absolutePath)

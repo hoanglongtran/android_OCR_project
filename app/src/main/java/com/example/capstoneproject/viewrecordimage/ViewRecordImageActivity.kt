@@ -1,6 +1,7 @@
 package com.example.capstoneproject.viewrecordimage
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.example.capstoneproject.R
 import com.example.capstoneproject.util.replaceFragmentInActivity
@@ -16,6 +17,7 @@ class ViewRecordImageActivity: AppCompatActivity()
         setContentView(R.layout.view_record_image_act)
         val imagePath = intent.getStringExtra(IMAGE_PATH)
 
+        // Set up the toolbar.
         setupActionBar(R.id.toolbar) {
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
@@ -29,6 +31,7 @@ class ViewRecordImageActivity: AppCompatActivity()
         //Create the presenter
         viewRecordImagePresenter = ViewRecordImagePresenter(imagePath, viewRecordImageFragment)
     }
+
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
