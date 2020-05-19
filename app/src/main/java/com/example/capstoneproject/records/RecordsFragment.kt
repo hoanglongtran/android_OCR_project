@@ -102,20 +102,13 @@ class RecordsFragment : Fragment(), RecordsContract.View {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK) {
             Log.d(TAG, "Result OK")
-            if (requestCode == UCrop.REQUEST_CROP) {
-                val resultUri = UCrop.getOutput(data!!)
-                Log.d(TAG, "Edit completed")
-                presenter.inferRecordImage(context!!)
-            }
             if (requestCode == REQUEST_TAKE_PHOTO) {
                 Log.d(TAG, "Image captured")
                 Log.d(TAG, currentImagePath)
                 uri = Uri.fromFile(File((currentImagePath)))
                 viewAdapter.addImage(currentImagePath)
                 viewAdapter.notifyDataSetChanged()
-                presenter.editRecordImage(context!!)
-                presenter.inferRecordImage(context!!)
-                //presenter.createImageData(uri, context!!)
+
             }
         } else if (resultCode == UCrop.RESULT_ERROR) {
             Log.d(TAG, "Edit error")

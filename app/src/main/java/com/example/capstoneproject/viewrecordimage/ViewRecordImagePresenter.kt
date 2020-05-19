@@ -23,7 +23,6 @@ class ViewRecordImagePresenter(val imagePath: String, val imagePosition: Int, va
         val uri = Uri.fromFile(File((imagePath)))
         viewRecordImageView.showEditRecordImage(uri)
 
-
     }
 
     override fun deleteImage() {
@@ -33,26 +32,9 @@ class ViewRecordImagePresenter(val imagePath: String, val imagePosition: Int, va
 
     override fun inferImage(context: Context) {
         viewRecordImageView.showInferRecordImage(imagePath)
-        /*val resultJSON = uploadImage(context)
-        val firstColumn = resultJSON?.getString("0")
-        val secondColumn = resultJSON?.getString("1")*/
-
 
     }
 
-/*    private fun uploadImage(context: Context): JSONObject? {
-        createImageData(context)
-        //imageData?: return
-        return HTTPRequestManager.uploadImage(imageData!!)
-    }
-
-    @Throws(IOException::class)
-    override fun createImageData(context: Context) {
-        val inputStream = context.contentResolver.openInputStream(Uri.fromFile(File(imagePath)))
-        inputStream?.buffered()?.use {
-            imageData = it.readBytes()
-        }
-    }*/
 
     override fun start() {
         TODO("Do something")

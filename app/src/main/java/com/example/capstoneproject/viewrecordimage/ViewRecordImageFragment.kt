@@ -66,7 +66,6 @@ class ViewRecordImageFragment : Fragment(), ViewRecordImageContract.View {
         when (item.itemId) {
             R.id.action_edit -> presenter.editRecordImage(context!!)
             R.id.action_delete -> presenter.deleteImage()
-            //R.id.menu_refresh -> presenter.loadTasks(true)
         }
         return true
     }

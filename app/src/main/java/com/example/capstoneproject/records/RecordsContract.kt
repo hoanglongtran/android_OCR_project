@@ -25,19 +25,11 @@ interface RecordsContract {
     }
 
     interface Presenter : BasePresenter {
-        fun createImageData(uri: Uri, context: Context)
 
         fun loadRecordImages()
 
         fun addNewRecordImage(context: Context)
 
-        fun openRecord()
-
-        fun deleteRecord()
-
-        fun editRecordImage(context: Context)
-
-        fun inferRecordImage(context: Context)
         fun listRecordImage(context: Context): ArrayList<String>
     }
 }

@@ -39,10 +39,6 @@ object HTTPRequestManager {
                     override fun onFailure(call: Call?, e: IOException?) {
                         // Error
                         Log.d(TAG, "Failed: $e")
-                        /*UiThreadStatement.runOnUiThread(Runnable {
-                            // For the example, you can show an error dialog or a toast
-                            // on the main UI thread
-                        })*/
                     }
 
                     @Throws(IOException::class)
@@ -58,10 +54,6 @@ object HTTPRequestManager {
                         resultJson = JSONObject(result)
                         //Update text view
                         editRecordPresenter.setContent(resultJson)
-                        //UiThreadStatement.runOnUiThread(Runnable {
-                            // For the example, you can show an error dialog or a toast
-                            // on the main UI thread
-                        //})
 
                         Log.d(TAG, "Response")
                         // Do something with the response
