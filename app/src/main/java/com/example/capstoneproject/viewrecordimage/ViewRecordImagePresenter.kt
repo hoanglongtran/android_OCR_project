@@ -1,15 +1,19 @@
 package com.example.capstoneproject.viewrecordimage
 
-import android.R.id
 import android.content.Context
 import android.net.Uri
 import android.util.Log
 import com.example.capstoneproject.data.source.local.RecordImageFileManager
+import com.example.capstoneproject.data.source.remote.HTTPRequestManager
+import org.json.JSONObject
 import java.io.File
+import java.io.IOException
 
 
 class ViewRecordImagePresenter(val imagePath: String, val imagePosition: Int, val viewRecordImageView: ViewRecordImageContract.View): ViewRecordImageContract.Presenter
 {
+    private var imageData: ByteArray? = null
+
     init {
         viewRecordImageView.presenter = this
     }
@@ -27,9 +31,28 @@ class ViewRecordImagePresenter(val imagePath: String, val imagePosition: Int, va
         viewRecordImageView.showRecrodImageDeleted(imagePosition)
     }
 
-    override fun inferImage() {
-        TODO("Not yet implemented")
+    override fun inferImage(context: Context) {
+        viewRecordImageView.showInferRecordImage(imagePath)
+        /*val resultJSON = uploadImage(context)
+        val firstColumn = resultJSON?.getString("0")
+        val secondColumn = resultJSON?.getString("1")*/
+
+
     }
+
+/*    private fun uploadImage(context: Context): JSONObject? {
+        createImageData(context)
+        //imageData?: return
+        return HTTPRequestManager.uploadImage(imageData!!)
+    }
+
+    @Throws(IOException::class)
+    override fun createImageData(context: Context) {
+        val inputStream = context.contentResolver.openInputStream(Uri.fromFile(File(imagePath)))
+        inputStream?.buffered()?.use {
+            imageData = it.readBytes()
+        }
+    }*/
 
     override fun start() {
         TODO("Do something")
@@ -40,6 +63,6 @@ class ViewRecordImagePresenter(val imagePath: String, val imagePosition: Int, va
     }
 
     companion object{
-        private const val TAG = "RecordImageView"
+        private const val TAG = "ViewRecordImagePresenter"
     }
 }

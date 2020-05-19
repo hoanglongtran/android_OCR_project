@@ -12,6 +12,7 @@ import android.view.*
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.example.capstoneproject.R
+import com.example.capstoneproject.editrecord.EditRecordActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.yalantis.ucrop.UCrop
 
@@ -46,8 +47,6 @@ class ViewRecordImageFragment : Fragment(), ViewRecordImageContract.View {
         setHasOptionsMenu(true)
         with(root) {
 
-
-
             recordImageView = findViewById(R.id.recordImageView)
 
             updateImage()
@@ -56,7 +55,8 @@ class ViewRecordImageFragment : Fragment(), ViewRecordImageContract.View {
 
         // Set up floating action button
         activity?.findViewById<FloatingActionButton>(R.id.fab_edit_image)?.setOnClickListener {
-            presenter.editRecordImage(context!!)
+            Log.d(TAG, "Infer image")
+            presenter.inferImage(context!!)
         }
 
         return root
@@ -108,6 +108,13 @@ class ViewRecordImageFragment : Fragment(), ViewRecordImageContract.View {
         intent.putExtra("POSITION", imagePosition)
         activity?.setResult(RESULT_DELETED_IMAGE, intent)
         activity?.finish()
+    }
+
+    override fun showInferRecordImage(imagePath: String) {
+        val inferImageIntent = Intent(context, EditRecordActivity::class.java).apply {
+            putExtra("PATH", imagePath)
+        }
+        startActivity(inferImageIntent)
     }
 
     private fun updateImage(){

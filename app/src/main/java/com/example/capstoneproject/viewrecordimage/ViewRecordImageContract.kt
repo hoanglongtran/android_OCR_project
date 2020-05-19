@@ -15,16 +15,19 @@ interface ViewRecordImageContract {
 
         fun showRecrodImageDeleted(imagePosition: Int)
 
+        fun showInferRecordImage(imagePath: String)
     }
 
     interface Presenter : BasePresenter {
 
         fun deleteImage()
 
-        fun inferImage()
+        fun inferImage(context: Context)
 
         fun getRecordImage(): File
 
         fun editRecordImage(context: Context)
+
+        //fun createImageData(context: Context)
     }
 }

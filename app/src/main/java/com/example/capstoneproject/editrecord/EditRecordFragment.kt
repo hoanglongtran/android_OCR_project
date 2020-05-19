@@ -36,6 +36,8 @@ class EditRecordFragment : Fragment(), EditRecordContract.View {
         savedInstanceState: Bundle?
     ): View? {
 
+        presenter.inferImage(context!!)
+
         val root: View = inflater.inflate(
             R.layout.edit_record_frag, container,
             false
@@ -50,10 +52,22 @@ class EditRecordFragment : Fragment(), EditRecordContract.View {
             development = findViewById(R.id.development)
             medicalInstruction = findViewById(R.id.medicalInstruction)
 
-            patientName.setText("Damn you", TextView.BufferType.EDITABLE)
+            //patientName.setText("Damn you", TextView.BufferType.EDITABLE)
         }
 
         return root
+    }
+
+    override fun setContent(firstColumn: String, secondColumn: String){
+        // start some dummy thread that is different from UI thread
+        Thread(Runnable {
+            // try to update View of UI thread
+            activity!!.runOnUiThread(java.lang.Runnable {
+                medicalInstruction.setText(firstColumn, TextView.BufferType.EDITABLE)
+                development.setText(secondColumn, TextView.BufferType.EDITABLE)
+            })
+        }).start()
+
     }
 
 

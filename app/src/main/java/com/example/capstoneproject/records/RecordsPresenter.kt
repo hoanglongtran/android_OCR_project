@@ -78,13 +78,12 @@ class RecordsPresenter(val recordsView: RecordsContract.View): RecordsContract.P
     }
 
     override fun inferRecordImage(context: Context) {
-        recordsView.showInferRecordImage()
         uploadImage(context)
     }
 
     private fun uploadImage(context: Context) {
         imageData?: return
-        val response = HTTPRequestManager.uploadImage(imageData!!)
+        //val response = HTTPRequestManager.uploadImage(imageData!!, this)
         /*val request = object : VolleyFileUploadRequest(
             Method.POST,
             postURL,

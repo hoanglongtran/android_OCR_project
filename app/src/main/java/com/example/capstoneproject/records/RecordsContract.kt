@@ -22,7 +22,6 @@ interface RecordsContract {
 
         fun showEditRecordImage(photoUri: Uri)
 
-        fun showInferRecordImage()
     }
 
     interface Presenter : BasePresenter {

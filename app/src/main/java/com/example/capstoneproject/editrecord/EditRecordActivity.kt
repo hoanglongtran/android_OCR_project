@@ -15,6 +15,8 @@ class EditRecordActivity: AppCompatActivity()
 
         setContentView(R.layout.edit_record_act)
 
+        val imagePath = intent.getStringExtra(IMAGE_PATH)
+
         setupActionBar(R.id.toolbar) {
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
@@ -26,10 +28,11 @@ class EditRecordActivity: AppCompatActivity()
         }
 
         //Create the presenter
-        editRecordPresenter = EditRecordPresenter(editImageFragment)
+        editRecordPresenter = EditRecordPresenter(imagePath, editImageFragment)
     }
 
     companion object {
         private const val TAG = "EditImageActivity"
+        private const val IMAGE_PATH = "PATH"
     }
 }

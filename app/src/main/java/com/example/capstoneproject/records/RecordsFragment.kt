@@ -113,6 +113,8 @@ class RecordsFragment : Fragment(), RecordsContract.View {
                 uri = Uri.fromFile(File((currentImagePath)))
                 viewAdapter.addImage(currentImagePath)
                 viewAdapter.notifyDataSetChanged()
+                presenter.editRecordImage(context!!)
+                presenter.inferRecordImage(context!!)
                 //presenter.createImageData(uri, context!!)
             }
         } else if (resultCode == UCrop.RESULT_ERROR) {
@@ -159,12 +161,7 @@ class RecordsFragment : Fragment(), RecordsContract.View {
         ucrop.start(context!!,this)
     }
 
-    override fun showInferRecordImage() {
-        val inferImageIntent = Intent(context, EditRecordActivity::class.java).apply {
 
-        }
-        startActivity(inferImageIntent)
-    }
 
 
 
